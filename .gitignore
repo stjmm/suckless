@@ -1,0 +1,15 @@
+dwm
+st
+dmenu
+dmenu_path
+dmenu_run
+slock
+stest
+
+*.o
+*.a
+
+config.h
+
+*.orig
+*.rej
