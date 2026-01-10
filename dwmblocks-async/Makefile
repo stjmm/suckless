@@ -7,7 +7,7 @@ INC_DIR := include
 
 DEBUG := 0
 VERBOSE := 0
-LIBS := xcb-atom
+LIBS := xcb-atom xcb
 
 PREFIX := /usr/local
 CFLAGS := -Ofast -I. -I$(INC_DIR) -std=c99

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+cpu_val=$(grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {printf "%02.0f", usage}')
+echo " $cpu_val%"
