@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+bright=$(brightnessctl -m | cut -d, -f4)
+
+echo "☀️ $bright"

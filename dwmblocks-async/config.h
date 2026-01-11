@@ -18,15 +18,11 @@
 
 // Define blocks for the status feed as X(icon, cmd, interval, signal).
 #define BLOCKS(X)             \
-    X("", "sb-mail", 600, 1)  \
-    X("", "sb-music", 0, 2)   \
-    X("", "sb-disk", 1800, 3) \
-    X("", "sb-memory", 10, 4) \
-    X("", "sb-loadavg", 5, 5) \
-    X("", "sb-mic", 0, 6)     \
-    X("", "sb-record", 0, 7)  \
-    X("", "sb-volume", 0, 8)  \
-    X("", "sb-battery", 5, 9) \
-    X("", "sb-date", 1, 10)
+    X("", "~/suckless/dwmblocks-async/sb-net",10,1) \
+    X("", "~/suckless/dwmblocks-async/sb-cpu",5,2) \
+    X("", "~/suckless/dwmblocks-async/sb-vol",0,4) \
+    X("", "~/suckless/dwmblocks-async/sb-bright",0,4) \
+    X("", "~/suckless/dwmblocks-async/sb-bat",30,5) \
+    X("", "~/suckless/dwmblocks-async/sb-time",60,6) \
 
 #endif  // CONFIG_H

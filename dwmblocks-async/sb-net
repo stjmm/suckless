@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+case $BLOCK_BUTTON in
+    1) nmtui & ;;
+esac
+
+if grep -xq "up" /sys/class/net/w*/operstate 2>/dev/null; then
+    wifi_ssid=$(iwgetid -r)
+    echo "󰖩 $wifi_ssid"
+elif grep -xq "up" /sys/class/net/e*/operstate 2>/dev/null; then
+    echo "󰈀 Wired"
+else
+    echo "󰤮 Disconnected"
+fi
