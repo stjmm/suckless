@@ -59,6 +59,7 @@ static void zoom(const Arg *);
 static void zoomabs(const Arg *);
 static void zoomreset(const Arg *);
 static void ttysend(const Arg *);
+static void chgalpha(const Arg *);
 void kscrollup(const Arg *);
 void kscrolldown(const Arg *);
 
@@ -247,6 +248,7 @@ static char *usedfont = NULL;
 static double usedfontsize = 0;
 static double defaultfontsize = 0;
 
+static char *opt_alpha = NULL;
 static char *opt_class = NULL;
 static char **opt_cmd  = NULL;
 static char *opt_embed = NULL;
@@ -820,6 +822,9 @@ xloadcols(void)
 				die("could not allocate color %d\n", i);
 		}
 
+	/* set alpha value of bg color */
+	if (opt_alpha)
+		alpha = strtof(opt_alpha, NULL);
 	dc.col[defaultbg].color.alpha = (unsigned short)(0xffff * alpha);
 	dc.col[defaultbg].pixel &= 0x00FFFFFF;
 	dc.col[defaultbg].pixel |= (unsigned char)(0xff * alpha) << 24;
@@ -1178,6 +1183,8 @@ xinit(int cols, int rows)
 	usedfont = (opt_font == NULL)? font : opt_font;
 	xloadfonts(usedfont, 0);
 
+	alpha_def = alpha;
+
 	/* colors */
 	xw.cmap = XCreateColormap(xw.dpy, parent, xw.vis, None);
 	xloadcols();
@@ -1268,6 +1275,30 @@ xinit(int cols, int rows)
 	xsel.xtarget = XInternAtom(xw.dpy, "UTF8_STRING", 0);
 	if (xsel.xtarget == None)
 		xsel.xtarget = XA_STRING;
+}
+
+void
+chgalpha(const Arg *arg)
+{
+    if (arg->f == -1.0f && alpha >= 0.1f)
+        alpha -= 0.1f;
+    else if (arg->f == 1.0f && alpha < 1.0f)
+        alpha += 0.1f;
+    else if (arg->f == 0.0f)
+        alpha = alpha_def;
+    else
+        return;
+
+    /* Clamp alpha so it never exceeds valid range */
+    if (alpha < 0.1f)
+        alpha = 0.1f;
+    if (alpha > 1.0f)
+        alpha = 1.0f;
+
+    dc.col[defaultbg].color.alpha = (unsigned short)(0xFFFF * alpha);
+    /* Required to remove artifacting from borderpx */
+    cresize(0, 0);
+    redraw();
 }
 
 int
