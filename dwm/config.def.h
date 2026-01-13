@@ -19,15 +19,15 @@ static char normfgcolor[]           = "#bbbbbb";
 static char selfgcolor[]            = "#eeeeee";
 static char selbordercolor[]        = "#005577";
 static char selbgcolor[]            = "#005577";
-static const char *colors[][3]      = {
+static char *colors[][3]      = {
 	/*               fg           bg           border   */
 	[SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
 	[SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
 	[SchemeStatus]  = { normfgcolor, normbgcolor,  "#000000"  }, // Statusbar right {text,background,not used but cannot be empty}
 	[SchemeTagsSel]  = { selfgcolor, selbgcolor,  "#000000"  }, // Tagbar left selected {text,background,not used but cannot be empty}
-	[SchemeTagsNorm]  = { normfbcolor, normbgcolor,  "#000000"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
+	[SchemeTagsNorm]  = { normfgcolor, normbgcolor,  "#000000"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
 	[SchemeInfoSel]  = { selfgcolor, selbgcolor,  "#000000"  }, // infobar middle  selected {text,background,not used but cannot be empty}
-	[SchemeInfoNorm]  = { normfbcolor, normbgcolor,  "#000000"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
+	[SchemeInfoNorm]  = { normfgcolor, normbgcolor,  "#000000"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
 };
 
 /* tagging */
@@ -144,12 +144,14 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 
-	{0,XF86XK_AudioRaiseVolume,spawn,SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5%")},
-	{0,XF86XK_AudioLowerVolume,spawn,SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5%")},
-	{0,XF86XK_AudioMute,spawn,SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle")},
-	{0,XF86XK_AudioMicMute,spawn,SHCMD("pact set-source-mute @DEFAULT_SOURCE@ toggle")},
-	{0,XF86XK_MonBrightnessUp,spawn,SHCMD("brightnessctl set +10%")},
-	{0,XF86XK_MonBrightnessDown,spawn,SHCMD("brightnessctl set 10%-")},
+	{0,XF86XK_AudioRaiseVolume,spawn,SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5%; pkill -RTMIN+10 dwmblocks")},
+	{0,XF86XK_AudioLowerVolume,spawn,SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5%; pkill -RTMIN+10 dwmblocks")},
+	{0,XF86XK_AudioMute,spawn,SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle; pkill -RTMIN+10 dwmblocks")},
+	{0,XF86XK_AudioMicMute,spawn,SHCMD("pact set-source-mute @DEFAULT_SOURCE@ toggle; pkill -RTMIN+10 dwmblocks")},
+	{0,XF86XK_MonBrightnessUp,spawn,SHCMD("brightnessctl set +10%; pkill -RTMIN+11 dwmblocks")},
+	{0,XF86XK_MonBrightnessDown,spawn,SHCMD("brightnessctl set 10%-; pkill -RTMIN+11 dwmblocks")},
+	{0, XF86XK_AudioPlay,  spawn, SHCMD("playerctl play-pause; pkill -RTMIN+13 dwmblocks")},
+    {0, XF86XK_AudioNext,  spawn, SHCMD("playerctl next; pkill -RTMIN+13 dwmblocks")},
 };
 
 /* button definitions */
