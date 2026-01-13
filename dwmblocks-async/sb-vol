@@ -1,35 +1,13 @@
 #!/usr/bin/env bash
 
-case $BLOCK_BUTTON in
-    1) pactl set-sink-mute @DEFAULT_SINK@ toggle ;; # Left click mute
-    4) pactl set-sink-volume @DEFAULT_SINK@ +5% ;;  # Scroll up
-    5) pactl set-sink-volume @DEFAULT_SINK@ -5% ;;  # Scroll down
-    3) st -e pavucontrol & ;;                        # Right click open mixer
-esac
+vol=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | sed 's/%//')
+mute=$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')
 
-# Get Volume percentage
-vol=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po '[0-9]+(?=%)' | head -n 1)
-
-# Get Mute status
-is_muted=$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')
-
-# Check for Headphones (looks for "headphone" in the active port name)
-is_headphone=$(pactl list sinks | grep -A 15 "Active Port" | grep -qi "headphone" && echo "yes")
-
-# Icon Logic
-if [ "$is_muted" = "yes" ]; then
-    icon="󰖁"
-    vol="--"
+if [ "$mute" = "yes" ]; then
+    echo "󰝟"
 else
-    if [ -n "$is_headphone" ]; then
-        icon="󰋋" # Headphone icon
-    elif [ "$vol" -ge 60 ]; then
-        icon="󰕾" # Volume high
-    elif [ "$vol" -ge 20 ]; then
-        icon="󰖀" # Volume mid
-    else
-        icon="󰕿" # Volume low
-    fi
+    if [ "$vol" -ge 70 ]; then icon="󰕾";
+    elif [ "$vol" -ge 30 ]; then icon="󰖀";
+    else icon="󰕿"; fi
+    echo "$icon $vol%"
 fi
-
-echo "$icon $vol%"

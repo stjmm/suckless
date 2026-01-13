@@ -20,9 +20,9 @@
 #define BLOCKS(X)             \
     X("", "~/suckless/dwmblocks-async/sb-net",10,1) \
     X("", "~/suckless/dwmblocks-async/sb-cpu",5,2) \
-    X("", "~/suckless/dwmblocks-async/sb-vol",0,4) \
-    X("", "~/suckless/dwmblocks-async/sb-bright",0,4) \
+    X("", "~/suckless/dwmblocks-async/sb-vol",0,10) \
+    X("", "~/suckless/dwmblocks-async/sb-bright",0,11) \
     X("", "~/suckless/dwmblocks-async/sb-bat",30,5) \
-    X("", "~/suckless/dwmblocks-async/sb-time",60,6) \
+    X("", "~/suckless/dwmblocks-async/sb-time",60,4)
 
 #endif  // CONFIG_H
