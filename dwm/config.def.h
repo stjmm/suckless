@@ -12,7 +12,7 @@ static       int smartgaps          = 0;        /* 1 means no outer gap when the
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "FiraCode Nerd Font:size=16" };
-static const char dmenufont[]       = "FiraCode Nerd Font:size=16";
+static const char dmenufont[]       = "FiraCode Nerd Font:size=18";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
