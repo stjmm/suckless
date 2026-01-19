@@ -100,7 +100,7 @@ float alpha_def;
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	"black",
+	"#141415", // <- vague.nvim bacground, "black",
 	"red3",
 	"green3",
 	"yellow3",
@@ -125,7 +125,7 @@ static const char *colorname[] = {
 	"#cccccc",
 	"#555555",
 	"gray90", /* default foreground colour */
-	"black", /* default background colour */
+	"#141415", /* default background colour */
 };
 
 
