@@ -5,7 +5,7 @@ case $BLOCK_BUTTON in
 esac
 
 if grep -xq "up" /sys/class/net/w*/operstate 2>/dev/null; then
-    echo " 󰖩 "
+    echo " 󰖩"
 elif grep -xq "up" /sys/class/net/e*/operstate 2>/dev/null; then
     echo " 󰈀 "
 else

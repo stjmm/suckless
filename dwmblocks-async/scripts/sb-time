@@ -1,3 +1,17 @@
 #!/usr/bin/env bash
 
-echo "󱑒 $(date '+%H:%M')"
+TOGGLE_FILE="/tmp/time_toggle"
+
+if [ "$BLOCK_BUTTON" = "1" ]; then
+    if [ -f "$TOGGLE_FILE" ]; then
+        rm "$TOGGLE_FILE"
+    else
+        touch "$TOGGLE_FILE"
+    fi
+fi
+
+if [ -f "$TOGGLE_FILE" ]; then
+    date '+%a %d %b'
+else
+    date '+%H:%M'
+fi

@@ -4,15 +4,15 @@
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int gappih    = 20;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 30;       /* vert outer gap between windows and screen edge */
+static const unsigned int gappih    = 0;       /* horiz inner gap between windows */
+static const unsigned int gappiv    = 0;       /* vert inner gap between windows */
+static const unsigned int gappoh    = 0;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 0;       /* vert outer gap between windows and screen edge */
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "FiraCode Nerd Font:size=16" };
-static const char dmenufont[]       = "FiraCode Nerd Font:size=18";
+static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=16" };
+static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=18";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -143,13 +143,14 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+    { MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("scrot -s - | xclip -selection clipboard -t image/png")},
 
 	{0,XF86XK_AudioRaiseVolume,spawn,SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5%; pkill -RTMIN+10 dwmblocks")},
 	{0,XF86XK_AudioLowerVolume,spawn,SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5%; pkill -RTMIN+10 dwmblocks")},
 	{0,XF86XK_AudioMute,spawn,SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle; pkill -RTMIN+10 dwmblocks")},
 	{0,XF86XK_AudioMicMute,spawn,SHCMD("pact set-source-mute @DEFAULT_SOURCE@ toggle; pkill -RTMIN+10 dwmblocks")},
-	{0,XF86XK_MonBrightnessUp,spawn,SHCMD("brightnessctl set +10%; pkill -RTMIN+11 dwmblocks")},
-	{0,XF86XK_MonBrightnessDown,spawn,SHCMD("brightnessctl set 10%-; pkill -RTMIN+11 dwmblocks")},
+	{0,XF86XK_MonBrightnessUp,spawn,SHCMD("brightnessctl set +5%; pkill -RTMIN+11 dwmblocks")},
+	{0,XF86XK_MonBrightnessDown,spawn,SHCMD("brightnessctl set 5%-; pkill -RTMIN+11 dwmblocks")},
 	{0, XF86XK_AudioPlay,  spawn, SHCMD("playerctl play-pause; pkill -RTMIN+13 dwmblocks")},
     {0, XF86XK_AudioNext,  spawn, SHCMD("playerctl next; pkill -RTMIN+13 dwmblocks")},
 };
