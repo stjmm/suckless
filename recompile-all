@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+for p in dwm st dmenu; do
+    cd "$p"
+    rm -rf config.h patches.h
+    sudo make clean install
+    cd ..
+done
